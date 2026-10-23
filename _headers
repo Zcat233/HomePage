@@ -20,7 +20,7 @@
 # ---------------------------------------------------------------------------
 
 /*
-  Cache-Control: public, max-age=1800, stale-while-revalidate=86400, stale-if-error=604800
+  Cache-Control: public, public, max-age=86400, stale-while-revalidate=604800, stale-if-error=604800
   Netlify-CDN-Cache-Control: public, s-maxage=31536000, must-revalidate
 
   # 基础安全头（与缓存无关，顺手加上没有代价）
