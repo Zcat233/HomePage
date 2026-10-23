@@ -1,0 +1,30 @@
+# Netlify 自定义响应头
+# 生效条件：本文件必须位于「publish 目录」根目录 —— 本仓库直接以根目录发布，所以就是这里。
+# 语法参考：https://docs.netlify.com/manage/routing/headers/
+#
+# ---------------------------------------------------------------------------
+# 缓存策略说明（本页是单文件应用，全部 CSS/JS 内联，只有 1 个请求）
+#
+#   Netlify-CDN-Cache-Control : 控制 Netlify 边缘节点。静态文件本来默认就是
+#                               s-maxage=31536000 且每次部署自动失效，这里写明只是显式化。
+#   Cache-Control (max-age)   : 控制浏览器。默认值 max-age=0 会让浏览器每次打开都
+#                               回源确认一次（304 往返），这就是首屏慢的那部分。
+#   stale-while-revalidate    : 缓存过期后先把旧页面立刻渲染给用户，同时后台静默更新，
+#                               用户永远不用等网络（下次打开就是新版本）。
+#
+# 想调整手感，改下面这一行即可：
+#   极速优先  -> public, max-age=86400, stale-while-revalidate=604800
+#   平衡(当前) -> public, max-age=1800,  stale-while-revalidate=86400
+#   始终最新  -> public, max-age=0,     must-revalidate
+#                （= Netlify 默认行为，每次打开都校验，最慢但绝对不会看到旧版）
+# ---------------------------------------------------------------------------
+
+/*
+  Cache-Control: public, max-age=1800, stale-while-revalidate=86400, stale-if-error=604800
+  Netlify-CDN-Cache-Control: public, s-maxage=31536000, must-revalidate
+
+  # 基础安全头（与缓存无关，顺手加上没有代价）
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
