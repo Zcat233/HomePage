@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>我的网址大全</title>
+<title>网址大全</title>
 <script>
 (function () {
   try {
@@ -403,7 +403,7 @@
 <header class="topbar">
   <div class="brand">
     <div class="logo">★</div>
-    <span>我的网址大全</span>
+    <span>网址大全</span>
   </div>
 
   <div class="search">
@@ -971,7 +971,7 @@
   });
 
   $('resetBtn').addEventListener('click', () => {
-    if (confirm('确定恢复默认数据吗？当前所有自定义内容将被清空（建议先导出备份）。')) {
+    if (confirm('确定恢复默认数据吗？当前所有自定义内容将被清空。')) {
       data = defaultData();
       save(); render();
     }
